@@ -3,6 +3,7 @@ package tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -27,7 +28,12 @@ public abstract class BaseTest {
 
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless");
+            options.addArguments("--ignore-certificate-errors");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-notifications");
+            driver = new ChromeDriver(options);
         } else {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
