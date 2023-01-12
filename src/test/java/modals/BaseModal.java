@@ -25,4 +25,5 @@ public abstract class BaseModal extends BasePage {
     public void clickCancelButton() {
         driver.findElement(CANCEL_BUTTON).click();
     }
+
 }

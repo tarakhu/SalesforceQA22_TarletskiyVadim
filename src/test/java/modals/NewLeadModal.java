@@ -2,6 +2,8 @@ package modals;
 
 import elements.Dropdown;
 import elements.Input;
+import elements.TextArea;
+import models.Lead;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,21 +13,26 @@ public class NewLeadModal extends BaseModal {
         super(driver);
     }
 
-    public void fillForm(String firstName, String lastName, String company, String city, int postalCode,
-                         String province, String country, int numberOfEmployees, int annualRevenue, int phone, String email,
-                         String website/*, String salutation*/) {
-        new Input(driver, "firstName").setValue(firstName);
-        new Input(driver, "lastName").setValue(lastName);
-        new Input(driver, "Company").setValue(company);
-        new Input(driver, "city").setValue(city);
-        new Input(driver, "postalCode").setValue(String.valueOf(postalCode));
-        new Input(driver, "province").setValue(province);
-        new Input(driver, "country").setValue(country);
-        new Input(driver, "NumberOfEmployees").setValue(String.valueOf(numberOfEmployees));
-        new Input(driver, "AnnualRevenue").setValue(String.valueOf(annualRevenue));
-        new Input(driver, "Phone").setValue(String.valueOf(phone));
-        new Input(driver, "Email").setValue(email);
-        new Input(driver, "Website").setValue(website);
-//        new Dropdown(driver, "")
+    public void fillForm(Lead lead) {
+        new Input(driver, "First Name").setValue(lead.getFirstName());
+        new Input(driver, "Last Name").setValue(lead.getLastName());
+        new Input(driver, "Company").setValue(lead.getCompany());
+        new Input(driver, "City").setValue(lead.getCity());
+        new Input(driver, "Zip/Postal Code").setValue(String.valueOf(lead.getPostalCode()));
+        new Input(driver, "State/Province").setValue(lead.getProvince());
+        new Input(driver, "Country").setValue(lead.getCountry());
+        new Input(driver, "No. of Employees").setValue(String.valueOf(lead.getNumberOfEmployees()));
+        new Input(driver, "Annual Revenue").setValue(String.valueOf(lead.getAnnualRevenue()));
+        new Input(driver, "Phone").setValue(String.valueOf(lead.getPhone()));
+        new Input(driver, "Email").setValue(lead.getEmail());
+        new Input(driver, "Website").setValue(lead.getWebsite());
+        new Dropdown(driver, "Industry").setDropdownValue(lead.getIndustry());
+        new Dropdown(driver, "Lead Status").setDropdownValue(lead.getLeadStatus());
+        new Dropdown(driver, "Salutation").setDropdownValue(lead.getSalutation());
+        new Dropdown(driver, "Rating").setDropdownValue(lead.getRating());
+        new Dropdown(driver, "Lead Source").setDropdownValue(lead.getLeadSource());
+        new TextArea(driver, "Street").setTextAreaValue(lead.getStreet());
+        new TextArea(driver, "Description").setTextAreaValue(lead.getDescription());
+
     }
 }

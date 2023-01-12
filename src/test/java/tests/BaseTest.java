@@ -1,6 +1,7 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import modals.NewLeadModal;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.HomePage;
+import pages.LeadDetailsPage;
+import pages.LeadsPage;
 import pages.LoginPage;
 
 import java.util.concurrent.TimeUnit;
@@ -21,6 +24,9 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected HomePage homePage;
+    protected LeadsPage leadsPage;
+    protected NewLeadModal newLeadModal;
+    protected LeadDetailsPage leadDetailsPage;
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"browser"})
@@ -46,6 +52,9 @@ public abstract class BaseTest {
 
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
+        leadsPage = new LeadsPage(driver);
+        newLeadModal = new NewLeadModal(driver);
+        leadDetailsPage = new LeadDetailsPage(driver);
 
 
     }

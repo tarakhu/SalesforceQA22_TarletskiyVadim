@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest{
 
     @Test
-    public void positiveLoginTest() throws InterruptedException {
+    public void positiveLoginTest() {
         loginPage.setUsername(USER_NAME);
         loginPage.setPassword(PASSWORD);
         loginPage.clickLoginButton();
@@ -15,7 +15,5 @@ public class LoginTest extends BaseTest{
 
         homePage.openAccountsTab();
 
-
-        Thread.sleep(5000);
     }
 }

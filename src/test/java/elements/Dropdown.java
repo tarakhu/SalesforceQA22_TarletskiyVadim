@@ -6,18 +6,19 @@ import org.openqa.selenium.WebElement;
 
 public class Dropdown extends BaseElement {
 
-    private String name;
-    private final static String DROPDOWN_LOCATOR = "//button[@class='slds-combobox__input slds-input_faux" +
-            " slds-combobox__input-value' and @name='%s']";
+    private final static String DROPDOWN_LOCATOR = "//label[text()='%s']/following-sibling::div/lightning-base-combobox";
+    private final static String DROPDOWN_BUTTON_LOCATOR = ".//button";
+    private final static String OPTION_DROPDOWN_LOCATOR = ".//lightning-base-combobox-item//span[text()='%s']";
 
-    public Dropdown(WebDriver driver) {
-        super(driver);
+    public Dropdown(WebDriver driver, String label) {
+        super(driver, label);
     }
 
-    public void setValue(String value) {
-        WebElement dropdown = driver.findElement(By.xpath(String.format(DROPDOWN_LOCATOR, this.name)));
+    public void setDropdownValue(String value) {
+        WebElement dropdown = driver.findElement(By.xpath(String.format(DROPDOWN_LOCATOR, this.label)));
         scrollIntoView(dropdown);
-        dropdown.sendKeys(value);
+        dropdown.findElement(By.xpath(DROPDOWN_BUTTON_LOCATOR)).click();
+        dropdown.findElement(By.xpath(String.format(OPTION_DROPDOWN_LOCATOR, value))).click();
     }
 
 }
