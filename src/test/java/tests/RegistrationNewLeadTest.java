@@ -1,5 +1,6 @@
 package tests;
 
+import enums.*;
 import models.Lead;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 public class RegistrationNewLeadTest extends BaseTest {
 
     @Test
-    public void registrationNewLeadTest() {
+    public void registrationNewLeadTest() throws InterruptedException {
 
         loginPage.setUsername(USER_NAME);
         loginPage.setPassword(PASSWORD);
@@ -18,47 +19,32 @@ public class RegistrationNewLeadTest extends BaseTest {
         leadsPage.clickNewButton();
         leadsPage.waitForSaveButtonIsDisplayed();
 
-//        String firstName = "sfdgdfh";
-//        String lastName = "dfgdfg";
-//        String company = "dfggfdfg";
-//        String city = "Minsk";
-//        int postalCode = 23455;
-//        String province = "dfgdf";
-//        String country = "dfgdf";
-//        int numberOfEmployees = 123;
-//        int annualRevenue = 444;
-//        int phone = 12345556;
-//        String email = "sdghg@gmail.com";
-//        String website = "sdfgfdgh.com";
-//        String industry = "Banking";
-//        Lead testLead = new Lead("sfdgdfh", "dfgdfg", "dfggfdfg", "Minsk" , 23455,
-//                "dfgdf", "dfgdf", 123, 444, 12345556, "sdghg@gmail.com",
-//                "sdfgfdgh.com", "Banking", "Dr.", "New", "Warm", "Other",
-//                "Marshala Losika, 6", "dfgdgfh");
-
-        Lead lead = new Lead.LeadBuilder("Tarletskiy", "Epam", "New")
+        Lead lead = new Lead.LeadBuilder("Tarletskiy", "Epam", LeadStatus.NEW)
                 .setFirstName("Vadim")
-                .setLeadSource("On Site")
-                .setAnnualRevenue(50000)
+                .setLeadSource(LeadSource.ADVERTISEMENT)
+                .setAnnualRevenue("500")
                 .setCity("Minsk")
                 .setCountry("Belarus")
                 .setDescription("It's a really good guy!")
                 .setEmail("membrana11@gmail.com")
-                .setIndustry("Banking")
+                .setIndustry(Industry.BANKING)
                 .setPostalCode(12345)
                 .setNumberOfEmployees(5)
                 .setPhone(372552525)
-                .setRating("Hot")
+                .setRating(Rating.HOT)
                 .setStreet("Timiryzeva, 67")
                 .setWebsite("opaopaopapa@bumbum.bom")
-                .setSalutation("Prof.")
+                .setSalutation(Salutations.MR)
                 .setProvince("Marokko")
                 .build();
 
         newLeadModal.fillForm(lead);
         newLeadModal.clickSaveButton();
 
-//        Assert.assertEquals(leadDetailsPage.getCompany(company), company);
+        Thread.sleep(5000);
+
+
+        Assert.assertEquals(leadDetailsPage.getLeadDetails(), lead);
 
 
 

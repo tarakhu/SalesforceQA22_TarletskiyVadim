@@ -26,11 +26,11 @@ public class NewLeadModal extends BaseModal {
         new Input(driver, "Phone").setValue(String.valueOf(lead.getPhone()));
         new Input(driver, "Email").setValue(lead.getEmail());
         new Input(driver, "Website").setValue(lead.getWebsite());
-        new Dropdown(driver, "Industry").setDropdownValue(lead.getIndustry());
-        new Dropdown(driver, "Lead Status").setDropdownValue(lead.getLeadStatus());
-        new Dropdown(driver, "Salutation").setDropdownValue(lead.getSalutation());
-        new Dropdown(driver, "Rating").setDropdownValue(lead.getRating());
-        new Dropdown(driver, "Lead Source").setDropdownValue(lead.getLeadSource());
+        new Dropdown(driver, "Industry").setDropdownValue(lead.getIndustry().getName());
+        new Dropdown(driver, "Lead Status").setDropdownValue(lead.getLeadStatus().getName());
+        new Dropdown(driver, "Salutation").setDropdownValue(lead.getSalutation().getName());
+        new Dropdown(driver, "Rating").setDropdownValue(lead.getRating().getName());
+        new Dropdown(driver, "Lead Source").setDropdownValue(lead.getLeadSource().getName());
         new TextArea(driver, "Street").setTextAreaValue(lead.getStreet());
         new TextArea(driver, "Description").setTextAreaValue(lead.getDescription());
 

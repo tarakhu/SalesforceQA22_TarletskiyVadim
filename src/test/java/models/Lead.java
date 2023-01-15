@@ -1,5 +1,7 @@
 package models;
 
+import enums.*;
+
 import java.util.Objects;
 
 public class Lead {
@@ -11,17 +13,19 @@ public class Lead {
     private final String province;
     private final String country;
     private final int numberOfEmployees;
-    private final int annualRevenue;
+    private final String annualRevenue;
     private final int phone;
     private final String email;
     private final String website;
-    private final String industry;
-    private final String salutation;
-    private final String leadStatus;
-    private final String rating;
-    private final String leadSource;
+    private final Industry industry;
+    private final Salutations salutation;
+    private final LeadStatus leadStatus;
+    private final Rating rating;
+    private final LeadSource leadSource;
     private final String street;
     private final String description;
+    private final String fullName;
+    private final String fullAddress;
 
     private Lead(LeadBuilder leadBuilder) {
 
@@ -44,48 +48,60 @@ public class Lead {
         this.leadSource = leadBuilder.leadSource;
         this.description = leadBuilder.description;
         this.street = leadBuilder.street;
+        this.fullName = leadBuilder.fullName;
+        this.fullAddress = leadBuilder.fullAddress;
     }
 
-
-
-//    public Lead(String firstName, String lastName, String company, String city, int postalCode, String province,
-//                String country, int numberOfEmployees, int annualRevenue, int phone, String email, String website, String industry,
-//                String salutation, String leadStatus, String rating, String leadSource,String street, String description) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.company = company;
-//        this.city = city;
-//        this.postalCode = postalCode;
-//        this.province = province;
-//        this.country = country;
-//        this.numberOfEmployees = numberOfEmployees;
-//        this.annualRevenue = annualRevenue;
-//        this.phone = phone;
-//        this.email = email;
-//        this.website = website;
-//        this.industry = industry;
-//        this.salutation = salutation;
-//        this.leadStatus = leadStatus;
-//        this.rating = rating;
-//        this.leadSource = leadSource;
-//        this.description = description;
-//        this.street = street;
-//
-//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lead lead = (Lead) o;
-        return postalCode == lead.postalCode && numberOfEmployees == lead.numberOfEmployees && annualRevenue == lead.annualRevenue && phone == lead.phone && company.equals(lead.company) && city.equals(lead.city) && province.equals(lead.province) && country.equals(lead.country) && email.equals(lead.email) && website.equals(lead.website) && industry.equals(lead.industry);
+        return numberOfEmployees == lead.numberOfEmployees
+                && annualRevenue == lead.annualRevenue;
+//                && phone == lead.phone
+//                && Objects.equals(company, lead.company)
+//                && Objects.equals(email, lead.email)
+//                && Objects.equals(website, lead.website)
+//                && industry == lead.industry
+//                && leadStatus == lead.leadStatus
+//                && rating == lead.rating
+//                && leadSource == lead.leadSource
+//                && Objects.equals(description, lead.description)
+//                && Objects.equals(fullName, lead.fullName)
+//                && Objects.equals(fullAddress, lead.fullAddress);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(company, city, postalCode, province, country, numberOfEmployees, annualRevenue, phone, email, website, industry);
+        return Objects.hash(company, numberOfEmployees, annualRevenue, phone, email, website, industry, salutation, leadStatus, rating, leadSource, description, fullName);
     }
 
+//    public String getFullName() {
+//        if (this.fullName != null) {
+//            return this.fullName;
+//        } else {
+//            String salutation = Objects.isNull(this.salutation) ? "" : this.salutation.getName();
+//            String firstName = Objects.isNull(this.firstName) ? "" : this.firstName;
+//            String lastName = Objects.isNull(this.lastName) ? "" : this.lastName;
+//            return (salutation + " " + firstName + " " + lastName).trim();
+//        }
+//    }
+//
+//    public String getFullAddress() {
+//        if (this.fullAddress != null) {
+//            return this.fullAddress;
+//        } else {
+//            String street = Objects.isNull(this.street) ? "" : this.street + "\n";
+//            String city = Objects.isNull(this.city) ? "" : this.city + ", ";
+//            String province = Objects.isNull(this.province) ? "" : this.province;
+//            String postalCode = Objects.isNull(this.postalCode) ? "" : String.valueOf(this.postalCode);
+//            String country = Objects.isNull(this.country) ? "" : "\n" + this.country;
+//            return (street + city + province + postalCode + country).trim();
+//        }
+//    }
 
     public String getStreet() {
         return street;
@@ -97,19 +113,19 @@ public class Lead {
     }
 
 
-    public String getSalutation() {
+    public Salutations getSalutation() {
         return salutation;
     }
 
-    public String getLeadStatus() {
-        return leadStatus;
+    public LeadStatus getLeadStatus() {
+        return this.leadStatus;
     }
 
-    public String getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public String getLeadSource() {
+    public LeadSource getLeadSource() {
         return leadSource;
     }
 
@@ -145,7 +161,7 @@ public class Lead {
         return numberOfEmployees;
     }
 
-    public int getAnnualRevenue() {
+    public String getAnnualRevenue() {
         return annualRevenue;
     }
 
@@ -161,9 +177,10 @@ public class Lead {
         return website;
     }
 
-    public String getIndustry() {
+    public Industry getIndustry() {
         return industry;
     }
+
 
     public static class LeadBuilder {
 
@@ -175,23 +192,37 @@ public class Lead {
         private String province;
         private String country;
         private int numberOfEmployees;
-        private int annualRevenue;
+        private String annualRevenue;
         private int phone;
         private String email;
         private String website;
-        private String industry;
-        private String salutation;
-        private String leadStatus;
-        private String rating;
-        private String leadSource;
+        private Industry industry;
+        private Salutations salutation;
+        private LeadStatus leadStatus;
+        private Rating rating;
+        private LeadSource leadSource;
         private String street;
         private String description;
+        private String fullName;
+        private String fullAddress;
 
-        public LeadBuilder(String lastName, String company, String leadStatus) {
+        public LeadBuilder(String lastName, String company, LeadStatus leadStatus) {
             this.lastName = lastName;
             this.company = company;
             this.leadStatus = leadStatus;
+        }
 
+
+        public LeadBuilder(String fullName, LeadStatus leadStatus, String company) {
+            this.fullName = fullName;
+            this.leadStatus = leadStatus;
+            this.company = company;
+        }
+
+
+        public LeadBuilder setFullAddress(String fullAddress) {
+            this.fullAddress = fullAddress;
+            return this;
         }
 
         public LeadBuilder setFirstName(String firstName) {
@@ -224,7 +255,7 @@ public class Lead {
             return this;
         }
 
-        public LeadBuilder setAnnualRevenue(int annualRevenue) {
+        public LeadBuilder setAnnualRevenue(String annualRevenue) {
             this.annualRevenue = annualRevenue;
             return this;
         }
@@ -244,22 +275,22 @@ public class Lead {
             return this;
         }
 
-        public LeadBuilder setIndustry(String industry) {
+        public LeadBuilder setIndustry(Industry industry) {
             this.industry = industry;
             return this;
         }
 
-        public LeadBuilder setSalutation(String salutation) {
+        public LeadBuilder setSalutation(Salutations salutation) {
             this.salutation = salutation;
             return this;
         }
 
-        public LeadBuilder setRating(String rating) {
+        public LeadBuilder setRating(Rating rating) {
             this.rating = rating;
             return this;
         }
 
-        public LeadBuilder setLeadSource(String leadSource) {
+        public LeadBuilder setLeadSource(LeadSource leadSource) {
             this.leadSource = leadSource;
             return this;
         }
@@ -275,6 +306,19 @@ public class Lead {
         }
 
         public Lead build() {
+            if (this.fullAddress == null && this.fullName == null) {
+                String salutation = Objects.isNull(this.salutation) ? "" : this.salutation.getName();
+                String firstName = Objects.isNull(this.firstName) ? "" : this.firstName;
+                String lastName = Objects.isNull(this.lastName) ? "" : this.lastName;
+                String street = Objects.isNull(this.street) ? "" : this.street + "\n";
+                String city = Objects.isNull(this.city) ? "" : this.city + ", ";
+                String province = Objects.isNull(this.province) ? "" : this.province + " ";
+                String postalCode = Objects.isNull(this.postalCode) ? "" : String.valueOf(this.postalCode);
+                String country = Objects.isNull(this.country) ? "" : "\n" + this.country;
+                this.fullAddress = (street + city + province + postalCode + country).trim();
+                this.fullName = (salutation + " " + firstName + " " + lastName).trim();
+                return new Lead(this);
+            }
             return new Lead(this);
         }
 
