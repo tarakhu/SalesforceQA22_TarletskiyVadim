@@ -3,9 +3,14 @@ package pages;
 import elements.RecordLayoutItem;
 import enums.*;
 import models.Lead;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LeadDetailsPage extends HomePage {
+
+    private final static By LEAD_CREATED_MESSAGE_LOCATOR = By.xpath("//span[text()=' was created.']");
+    private final static By LEAD_OWNER_LOCATOR = By.xpath("//span[text()='Lead Owner']");
+    //span[text()=' was created.']
 
     public LeadDetailsPage(WebDriver driver) {
         super(driver);
@@ -27,13 +32,15 @@ public class LeadDetailsPage extends HomePage {
                 .setLeadSource(LeadSource.fromString(new RecordLayoutItem(driver, "Lead Source").getValue()))
                 .setDescription(new RecordLayoutItem(driver, "Description").getValue());
                 return lead.build();
-
-
     }
 
+    public boolean leadCreatedMessage() {
+        return driver.findElement(LEAD_CREATED_MESSAGE_LOCATOR).isDisplayed();
+    }
 
-
-
+    public void waitForLeadOwnerIsDisplayed() {
+        waitForElementDisplayed(LEAD_CREATED_MESSAGE_LOCATOR);
+    }
 
 }
 

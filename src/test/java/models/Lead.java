@@ -1,9 +1,11 @@
 package models;
 
 import enums.*;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class Lead {
     private final String firstName;
     private final String lastName;
@@ -59,24 +61,25 @@ public class Lead {
         if (o == null || getClass() != o.getClass()) return false;
         Lead lead = (Lead) o;
         return numberOfEmployees == lead.numberOfEmployees
-                && annualRevenue == lead.annualRevenue;
-//                && phone == lead.phone
-//                && Objects.equals(company, lead.company)
-//                && Objects.equals(email, lead.email)
-//                && Objects.equals(website, lead.website)
-//                && industry == lead.industry
-//                && leadStatus == lead.leadStatus
-//                && rating == lead.rating
-//                && leadSource == lead.leadSource
-//                && Objects.equals(description, lead.description)
-//                && Objects.equals(fullName, lead.fullName)
-//                && Objects.equals(fullAddress, lead.fullAddress);
+                && Objects.equals(annualRevenue, lead.annualRevenue)
+                && phone == lead.phone
+                && Objects.equals(company, lead.company)
+                && Objects.equals(email, lead.email)
+                && Objects.equals(website, lead.website)
+                && Objects.equals(industry, lead.industry)
+                && Objects.equals(leadStatus, lead.leadStatus)
+                && Objects.equals(rating, lead.rating)
+                && Objects.equals(leadSource, lead.leadSource)
+                && Objects.equals(description, lead.description)
+                && Objects.equals(fullName, lead.fullName)
+                && Objects.equals(fullAddress, lead.fullAddress);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(company, numberOfEmployees, annualRevenue, phone, email, website, industry, salutation, leadStatus, rating, leadSource, description, fullName);
+        return Objects.hash(company, numberOfEmployees, annualRevenue, phone, email, website, industry, salutation,
+                leadStatus, rating, leadSource, description, fullName);
     }
 
 //    public String getFullName() {
@@ -102,84 +105,6 @@ public class Lead {
 //            return (street + city + province + postalCode + country).trim();
 //        }
 //    }
-
-    public String getStreet() {
-        return street;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-
-    public Salutations getSalutation() {
-        return salutation;
-    }
-
-    public LeadStatus getLeadStatus() {
-        return this.leadStatus;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public LeadSource getLeadSource() {
-        return leadSource;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getNumberOfEmployees() {
-        return numberOfEmployees;
-    }
-
-    public String getAnnualRevenue() {
-        return annualRevenue;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public Industry getIndustry() {
-        return industry;
-    }
 
 
     public static class LeadBuilder {
